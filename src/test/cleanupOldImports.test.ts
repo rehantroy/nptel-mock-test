@@ -211,7 +211,6 @@ describe('Legacy OCR Import Cleanup & Preload Isolation Suite', () => {
       incorrectCount: 0,
       unansweredCount: 0,
       score: 1,
-      maxScore: 1,
       percentage: 100,
     };
     await saveAttempt(mockAttempt);
