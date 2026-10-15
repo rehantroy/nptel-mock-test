@@ -68,7 +68,7 @@ export const FormattedContent: React.FC<FormattedContentProps> = ({
     // 4. Basic Markdown: bold, italic, code
     text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     text = text.replace(/\*([^\*\n]+?)\*/g, '<em>$1</em>');
-    text = text.replace(/`([^`\n]+?)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-sm font-mono">$1</code>');
+    text = text.replace(/`([^`\n]+?)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 text-sm font-mono">$1</code>');
 
     // 5. Preserving linebreaks into paragraphs
     const paragraphs = text.split(/\n\s*\n/);
@@ -84,7 +84,7 @@ export const FormattedContent: React.FC<FormattedContentProps> = ({
 
   return (
     <div
-      className={`question-content text-slate-800 dark:text-slate-100 ${className}`}
+      className={`question-content text-slate-900 ${className}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );

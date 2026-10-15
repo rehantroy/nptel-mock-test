@@ -361,7 +361,7 @@ export const ActiveTest: React.FC = () => {
                       {label}
                     </div>
 
-                    <div className="flex-1 pt-1 text-sm sm:text-base text-slate-800 font-normal">
+                    <div className="flex-1 pt-1 text-sm sm:text-base text-slate-900 font-normal">
                       <FormattedContent content={option.text} />
                     </div>
 
