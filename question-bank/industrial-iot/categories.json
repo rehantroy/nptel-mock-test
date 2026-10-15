@@ -1,0 +1,20 @@
+[
+  {
+    "id": "assignment",
+    "name": "Assignment Questions",
+    "subjectId": "iiot",
+    "isLegacyAssignment": true
+  },
+  {
+    "id": "other",
+    "name": "Extra High-Probability Questions",
+    "subjectId": "iiot",
+    "isLegacyAssignment": false
+  },
+  {
+    "id": "extra_high_probability",
+    "name": "15 Extra High-Probability Questions",
+    "subjectId": "iiot",
+    "isLegacyAssignment": false
+  }
+]
