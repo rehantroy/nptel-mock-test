@@ -205,6 +205,7 @@ describe('Legacy OCR Import Cleanup & Preload Isolation Suite', () => {
       shuffledOptions: {},
       userAnswers: { iiot_w1_q01: 'opt_iiot_w1_q01_b' },
       flaggedQuestions: {},
+      // Conforms strictly to TestAttempt schema (no obsolete maxScore property)
       totalEligible: 1,
       answeredCount: 1,
       correctCount: 1,
