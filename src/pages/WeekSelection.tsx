@@ -18,14 +18,23 @@ export const WeekSelection: React.FC = () => {
   const initialWeek = searchParams.get('week');
 
   const [questions, setQuestions] = useState<Question[]>([]);
+  const activeSubjectId = getActiveSubjectId();
   const [selectedWeek, setSelectedWeek] = useState<WeekNumber>(
-    initialWeek !== null ? (parseInt(initialWeek, 10) as WeekNumber) : 0
+    initialWeek !== null
+      ? (parseInt(initialWeek, 10) as WeekNumber)
+      : activeSubjectId === 'hci'
+      ? 1
+      : 0
   );
   const [loading, setLoading] = useState(true);
 
   const loadData = () => {
-    getAllQuestions().then((qs) => {
+    const curSubId = getActiveSubjectId();
+    getAllQuestions(curSubId).then((qs) => {
       setQuestions(qs);
+      if (initialWeek === null) {
+        setSelectedWeek(curSubId === 'hci' ? 1 : 0);
+      }
       setLoading(false);
     });
   };
@@ -86,7 +95,9 @@ export const WeekSelection: React.FC = () => {
             Mode 1: Week-wise Test Selection
           </h1>
           <p className="text-xs text-slate-500">
-            Select one week from Week 0 to Week 12 to practice its verified assignment questions.
+            {activeSubjectId === 'hci'
+              ? 'Select one week from Week 1 to Week 12 to practice its verified assignment questions.'
+              : 'Select one week from Week 0 to Week 12 to practice its verified assignment questions.'}
           </p>
         </div>
       </div>
@@ -95,11 +106,15 @@ export const WeekSelection: React.FC = () => {
       <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-6">
         <div className="flex items-center justify-between">
           <span className="text-sm font-semibold text-slate-700">Choose Academic Week:</span>
-          <span className="text-xs text-blue-600 font-medium">Week 0 is a standard syllabus week</span>
+          <span className="text-xs text-blue-600 font-medium">
+            {activeSubjectId === 'hci'
+              ? 'Human-Computer Interaction (NPTEL Weeks 1–12)'
+              : 'Week 0 is a standard syllabus week'}
+          </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          {WEEKS_LIST.map((w) => {
+          {(activeSubjectId === 'hci' ? WEEKS_LIST.filter((w) => w >= 1) : WEEKS_LIST).map((w) => {
             const isSelected = selectedWeek === w;
             const count = weekStats[w].assignmentsVerified;
             return (

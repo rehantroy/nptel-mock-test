@@ -122,7 +122,9 @@ export const Dashboard: React.FC = () => {
           </h1>
           <p className="text-blue-100 text-sm sm:text-base leading-relaxed">
             {activeSubject.description ||
-              'Practice and master official assignment questions and verified problem sets across all 13 weeks (Week 0 to Week 12). Shuffled tests, instant scoring, and answer verification.'}
+              (activeSubject.id === 'hci'
+                ? 'Practice and master official assignment questions and verified problem sets across Weeks 1 to 12. Shuffled tests, instant scoring, and answer verification.'
+                : 'Practice and master official assignment questions and verified problem sets across all 13 weeks (Week 0 to Week 12). Shuffled tests, instant scoring, and answer verification.')}
           </p>
 
           <div className="pt-2 flex flex-wrap gap-3">
@@ -219,13 +221,15 @@ export const Dashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Week by Week Matrix Grid (Week 0 to Week 12) */}
+      {/* Week by Week Matrix Grid */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold text-slate-900">Course Syllabus & Weeks Matrix</h2>
             <p className="text-xs text-slate-500">
-              All 13 weeks (Week 0 to Week 12) — Assignment & Additional Question coverage
+              {activeSubject.id === 'hci'
+                ? 'Weeks 1 to 12 — Assignment & Additional Question coverage'
+                : 'All 13 weeks (Week 0 to Week 12) — Assignment & Additional Question coverage'}
             </p>
           </div>
           <Link
@@ -238,7 +242,7 @@ export const Dashboard: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {WEEKS_LIST.map((w: WeekNumber) => {
+          {(activeSubject.id === 'hci' ? WEEKS_LIST.filter((w) => w >= 1) : WEEKS_LIST).map((w: WeekNumber) => {
             const st = weekStats[w];
             const hasVerified = st.totalVerified > 0;
             return (

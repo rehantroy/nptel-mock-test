@@ -19,19 +19,29 @@ export const CustomTestConfig: React.FC = () => {
   const navigate = useNavigate();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeSubject, setActiveSubject] = useState<Subject | null>(null);
-  const [selectedWeeks, setSelectedWeeks] = useState<WeekNumber[]>([0, 1, 2]);
+  const [selectedWeeks, setSelectedWeeks] = useState<WeekNumber[]>([1]);
   const [questionType, setQuestionType] = useState<'assignment' | 'other' | 'both'>('both');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
+  const loadData = async () => {
+    const sub = await getActiveSubject();
+    const qs = await getAllQuestions(sub.id);
+    setQuestions(qs);
+    setActiveSubject(sub);
+    setSelectedWeeks(sub.id === 'hci' ? [1] : [0, 1, 2]);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    async function loadData() {
-      const [qs, sub] = await Promise.all([getAllQuestions(), getActiveSubject()]);
-      setQuestions(qs);
-      setActiveSubject(sub);
-      setLoading(false);
-    }
     loadData();
+
+    const handleSubjectChanged = () => {
+      loadData();
+    };
+
+    window.addEventListener('subject_changed', handleSubjectChanged);
+    return () => window.removeEventListener('subject_changed', handleSubjectChanged);
   }, []);
 
   const toggleWeek = (w: WeekNumber) => {
@@ -44,11 +54,12 @@ export const CustomTestConfig: React.FC = () => {
   };
 
   const selectAllWeeks = () => {
-    setSelectedWeeks([...WEEKS_LIST]);
+    const available = activeSubject?.id === 'hci' ? WEEKS_LIST.filter((w) => w >= 1) : WEEKS_LIST;
+    setSelectedWeeks([...available]);
   };
 
   const deselectAllWeeks = () => {
-    setSelectedWeeks([0]);
+    setSelectedWeeks([activeSubject?.id === 'hci' ? 1 : 0]);
   };
 
   // Extract distinct dynamic categories present in questions
@@ -131,7 +142,11 @@ export const CustomTestConfig: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-bold text-slate-900">1. Select Weeks to Include</h2>
-              <p className="text-xs text-slate-500">Pick any combination from Week 0 to Week 12</p>
+              <p className="text-xs text-slate-500">
+                {activeSubject?.id === 'hci'
+                  ? 'Pick any combination from Week 1 to Week 12'
+                  : 'Pick any combination from Week 0 to Week 12'}
+              </p>
             </div>
             <div className="flex gap-2">
               <button
@@ -152,7 +167,7 @@ export const CustomTestConfig: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-            {WEEKS_LIST.map((w) => {
+            {(activeSubject?.id === 'hci' ? WEEKS_LIST.filter((w) => w >= 1) : WEEKS_LIST).map((w) => {
               const checked = selectedWeeks.includes(w);
               return (
                 <button

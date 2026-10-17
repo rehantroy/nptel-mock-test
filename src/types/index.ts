@@ -35,6 +35,18 @@ export const DEFAULT_SUBJECT: Subject = {
   createdAt: '2026-01-01T00:00:00.000Z',
 };
 
+export const HCI_SUBJECT: Subject = {
+  id: 'hci',
+  name: 'Human-Computer Interaction',
+  code: 'HCI',
+  description: 'NPTEL Human-Computer Interaction course (Dr. Rajiv Ratn Shah, IIIT Delhi)',
+  maxWeeks: 12,
+  isDefault: false,
+  createdAt: '2026-01-01T00:00:00.000Z',
+};
+
+export const AVAILABLE_SUBJECTS: Subject[] = [DEFAULT_SUBJECT, HCI_SUBJECT];
+
 export interface QuestionCategory {
   id: string; // Stable slug, e.g., 'assignment', 'important_numerical', etc.
   name: string; // e.g., 'Important Numerical Questions'

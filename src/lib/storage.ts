@@ -1,6 +1,6 @@
 import { openDB, type IDBPDatabase } from 'idb';
 import type { Question, TestAttempt, DatabaseBackup, Subject, QuestionCategory } from '../types';
-import { DEFAULT_SUBJECT } from '../types';
+import { DEFAULT_SUBJECT, HCI_SUBJECT } from '../types';
 import { DatabaseBackupSchema } from './validation';
 
 const DB_NAME = 'iiot_mock_test_db';
@@ -10,7 +10,10 @@ let dbPromise: Promise<IDBPDatabase> | null = null;
 
 // In-memory fallback if IndexedDB is unavailable
 const memoryStore = {
-  subjects: new Map<string, Subject>([[DEFAULT_SUBJECT.id, DEFAULT_SUBJECT]]),
+  subjects: new Map<string, Subject>([
+    [DEFAULT_SUBJECT.id, DEFAULT_SUBJECT],
+    [HCI_SUBJECT.id, HCI_SUBJECT],
+  ]),
   categories: new Map<string, QuestionCategory>(),
   questions: new Map<string, Question>(),
   attempts: new Map<string, TestAttempt>(),
@@ -138,14 +141,25 @@ async function getDB(): Promise<IDBPDatabase> {
 
 export async function getSubjects(): Promise<Subject[]> {
   if (!isIDBAvailable()) {
+    if (!memoryStore.subjects.has(DEFAULT_SUBJECT.id)) {
+      memoryStore.subjects.set(DEFAULT_SUBJECT.id, DEFAULT_SUBJECT);
+    }
+    if (!memoryStore.subjects.has(HCI_SUBJECT.id)) {
+      memoryStore.subjects.set(HCI_SUBJECT.id, HCI_SUBJECT);
+    }
     return Array.from(memoryStore.subjects.values());
   }
   try {
     const db = await getDB();
     const list = await db.getAll('subjects');
-    if (list.length === 0) {
-      await db.put('subjects', DEFAULT_SUBJECT);
-      return [DEFAULT_SUBJECT];
+    const standardSubjects = [DEFAULT_SUBJECT, HCI_SUBJECT];
+    let updated = false;
+    for (const sub of standardSubjects) {
+      if (!list.some((s: Subject) => s.id === sub.id)) {
+        await db.put('subjects', sub);
+        list.push(sub);
+        updated = true;
+      }
     }
     return list;
   } catch (err) {
@@ -180,8 +194,8 @@ export async function saveSubject(subject: Subject): Promise<void> {
 export async function deleteSubject(
   subjectId: string
 ): Promise<{ success: boolean; error?: string }> {
-  if (subjectId === DEFAULT_SUBJECT.id) {
-    return { success: false, error: 'Cannot delete the default subject.' };
+  if (subjectId === DEFAULT_SUBJECT.id || subjectId === HCI_SUBJECT.id) {
+    return { success: false, error: 'Cannot delete the built-in default subjects.' };
   }
 
   // Check if subject has existing questions

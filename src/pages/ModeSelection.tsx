@@ -41,14 +41,23 @@ export const ModeSelection: React.FC = () => {
   const assignmentQuestions = verified.filter((q) => q.questionType === 'assignment');
   const otherQuestions = verified.filter((q) => q.questionType === 'other');
 
+  const activeSubId = getActiveSubjectId();
+  const isHci = activeSubId === 'hci';
+  const weekRangeLabel = isHci ? '1–12' : '0–12';
+  const totalWeeksCount = isHci ? 12 : 13;
+
   const startDirectMode = async (
     mode: 'all_week' | 'other_all' | 'all_questions'
   ) => {
+    const allWeeks = isHci
+      ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
     const config = {
       mode,
-      selectedWeeks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as any,
+      selectedWeeks: allWeeks as any,
       questionType: (mode === 'all_week' ? 'assignment' : mode === 'other_all' ? 'other' : 'both') as any,
-      subjectId: getActiveSubjectId(),
+      subjectId: activeSubId,
     };
 
     const eligible = filterQuestionsForTest(questions, config);
@@ -67,10 +76,10 @@ export const ModeSelection: React.FC = () => {
       id: 'week_wise',
       title: 'Mode 1: Week-wise Test',
       subtitle: 'Single Week • Assignment Questions Only',
-      desc: 'Select a specific week from Week 0 to Week 12. Focuses exclusively on the verified original assignment questions for that syllabus module.',
+      desc: `Select a specific week from Week ${isHci ? '1' : '0'} to Week 12. Focuses exclusively on the verified original assignment questions for that syllabus module.`,
       icon: Calendar,
-      countBadge: `${assignmentQuestions.length} Assignments across 13 Weeks`,
-      actionText: 'Choose Week (0–12)',
+      countBadge: `${assignmentQuestions.length} Assignments across ${totalWeeksCount} Weeks`,
+      actionText: `Choose Week (${weekRangeLabel})`,
       onClick: () => navigate('/modes/week-wise'),
       color: 'blue',
     },
@@ -88,8 +97,8 @@ export const ModeSelection: React.FC = () => {
     {
       id: 'all_week',
       title: 'Mode 3: All Week Test',
-      subtitle: 'All Weeks 0–12 • Assignment Questions Only',
-      desc: 'Comprehensive assignment exam covering all eligible assignment questions across every week from Week 0 to Week 12. No extra questions included.',
+      subtitle: `All Weeks ${weekRangeLabel} • Assignment Questions Only`,
+      desc: `Comprehensive assignment exam covering all eligible assignment questions across every week from Week ${isHci ? '1' : '0'} to Week 12. No extra questions included.`,
       icon: Layers,
       countBadge: `${assignmentQuestions.length} Eligible Questions`,
       actionText: 'Start All Weeks Assignment Test',
@@ -113,7 +122,7 @@ export const ModeSelection: React.FC = () => {
       id: 'all_questions',
       title: 'Mode 5: All Questions Test',
       subtitle: 'Complete Master Revision • All Weeks & Types',
-      desc: 'The ultimate final revision test. Combines all verified assignment questions and additional questions across all 13 weeks. Strictly deduplicated.',
+      desc: `The ultimate final revision test. Combines all verified assignment questions and additional questions across all ${totalWeeksCount} weeks. Strictly deduplicated.`,
       icon: GraduationCap,
       countBadge: `${verified.length} Total Eligible Questions`,
       actionText: 'Start Complete Revision Test',

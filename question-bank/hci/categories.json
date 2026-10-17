@@ -1,0 +1,14 @@
+[
+  {
+    "id": "assignment",
+    "name": "Weekly Assignment",
+    "subjectId": "hci",
+    "isLegacyAssignment": true
+  },
+  {
+    "id": "other",
+    "name": "Probable Practice Questions",
+    "subjectId": "hci",
+    "isLegacyAssignment": false
+  }
+]

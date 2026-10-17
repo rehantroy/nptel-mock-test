@@ -1,0 +1,1062 @@
+[
+  {
+    "id": "hci_w1_q01",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 1,
+    "questionText": "What does HCI stand for?",
+    "text": "What does HCI stand for?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q01_a",
+        "text": "Human Computer Integration"
+      },
+      {
+        "id": "opt_hci_w1_q01_b",
+        "text": "Human Computer Interaction"
+      },
+      {
+        "id": "opt_hci_w1_q01_c",
+        "text": "High Computer Intelligence"
+      },
+      {
+        "id": "opt_hci_w1_q01_d",
+        "text": "Human Control Interface"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q01_b",
+    "topic": "Introduction to HCI",
+    "explanation": "HCI is Human-Computer Interaction, “the study and design of how people interact with computers and other technologies” (Lecture 01_04). The other expansions are invented.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 9,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 9,
+      "rawAnswer": "B",
+      "rawQNum": 1
+    }
+  },
+  {
+    "id": "hci_w1_q02",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 2,
+    "questionText": "Which of the following is a key component of HCI?",
+    "text": "Which of the following is a key component of HCI?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q02_a",
+        "text": "User"
+      },
+      {
+        "id": "opt_hci_w1_q02_b",
+        "text": "Processor speed"
+      },
+      {
+        "id": "opt_hci_w1_q02_c",
+        "text": "Internet cable"
+      },
+      {
+        "id": "opt_hci_w1_q02_d",
+        "text": "Battery life"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q02_a",
+    "topic": "Key Components of HCI",
+    "explanation": "The slide “Key Components of HCI” lists User, Technology and Interaction; the user is “central to HCI”. Processor speed, cables and battery life are hardware specifications, not HCI components.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 9,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 9,
+      "rawAnswer": "A",
+      "rawQNum": 2
+    }
+  },
+  {
+    "id": "hci_w1_q03",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 3,
+    "questionText": "Which is an example of good design?",
+    "text": "Which is an example of good design?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q03_a",
+        "text": "Confusing navigation"
+      },
+      {
+        "id": "opt_hci_w1_q03_b",
+        "text": "Clear push/pull sign on door"
+      },
+      {
+        "id": "opt_hci_w1_q03_c",
+        "text": "Too many buttons"
+      },
+      {
+        "id": "opt_hci_w1_q03_d",
+        "text": "No feedback"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q03_b",
+    "topic": "Principles of Good Design",
+    "explanation": "Tutorial 1 calls a door handle with a clear push/pull sign good design because it “immediately tells people what to do”. A, C and D are all in the list of bad-design indicators (confusing navigation, overcomplicated interface, poor feedback).",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 9,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 9,
+      "rawAnswer": "B",
+      "rawQNum": 3
+    }
+  },
+  {
+    "id": "hci_w1_q04",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 4,
+    "questionText": "Digital transformation means:",
+    "text": "Digital transformation means:",
+    "options": [
+      {
+        "id": "opt_hci_w1_q04_a",
+        "text": "Converting physical processes into digital systems"
+      },
+      {
+        "id": "opt_hci_w1_q04_b",
+        "text": "Increasing manual work"
+      },
+      {
+        "id": "opt_hci_w1_q04_c",
+        "text": "Removing technology"
+      },
+      {
+        "id": "opt_hci_w1_q04_d",
+        "text": "Using paper forms only"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q04_a",
+    "topic": "Digital Transformation in HCI",
+    "explanation": "Digital transformation is the integration of digital technologies into all areas, e.g. the physical driving-licence form becoming an online form (Lecture 01_04 activity). The other options are the opposite of transformation.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 9,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 9,
+      "rawAnswer": "A",
+      "rawQNum": 4
+    }
+  },
+  {
+    "id": "hci_w1_q05",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 5,
+    "questionText": "Which of the following is NOT a usability factor?",
+    "text": "Which of the following is NOT a usability factor?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q05_a",
+        "text": "Efficiency"
+      },
+      {
+        "id": "opt_hci_w1_q05_b",
+        "text": "Memorability"
+      },
+      {
+        "id": "opt_hci_w1_q05_c",
+        "text": "Network speed"
+      },
+      {
+        "id": "opt_hci_w1_q05_d",
+        "text": "Satisfaction"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q05_c",
+    "topic": "Usability Factors",
+    "explanation": "The lecture’s usability components are Efficiency, Effectiveness, Learnability, Memorability and Satisfaction. Network speed is a technical property of the connection, not a usability factor.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 10,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 10,
+      "rawAnswer": "C",
+      "rawQNum": 5
+    }
+  },
+  {
+    "id": "hci_w1_q06",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 6,
+    "questionText": "Which principle ensures users understand possible actions?",
+    "text": "Which principle ensures users understand possible actions?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q06_a",
+        "text": "Feedback"
+      },
+      {
+        "id": "opt_hci_w1_q06_b",
+        "text": "Affordance"
+      },
+      {
+        "id": "opt_hci_w1_q06_c",
+        "text": "Consistency"
+      },
+      {
+        "id": "opt_hci_w1_q06_d",
+        "text": "Visibility"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q06_b",
+    "topic": "Interaction Design Principles",
+    "explanation": "Affordance: “Users should understand what actions are possible just by looking at the interface.” Feedback is about the response after an action; visibility is about functions being easy to see; consistency is about uniformity.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 10,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 10,
+      "rawAnswer": "B",
+      "rawQNum": 6
+    }
+  },
+  {
+    "id": "hci_w1_q07",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 7,
+    "questionText": "Feedback in interaction design means:",
+    "text": "Feedback in interaction design means:",
+    "options": [
+      {
+        "id": "opt_hci_w1_q07_a",
+        "text": "Removing buttons"
+      },
+      {
+        "id": "opt_hci_w1_q07_b",
+        "text": "System response after user action"
+      },
+      {
+        "id": "opt_hci_w1_q07_c",
+        "text": "Increasing storage"
+      },
+      {
+        "id": "opt_hci_w1_q07_d",
+        "text": "Deleting data"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q07_b",
+    "topic": "Feedback in IxD",
+    "explanation": "“Clear feedback should be provided after user actions, e.g. a button changing color when clicked.”",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 10,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 10,
+      "rawAnswer": "B",
+      "rawQNum": 7
+    }
+  },
+  {
+    "id": "hci_w1_q08",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 8,
+    "questionText": "A cluttered interface leads to:",
+    "text": "A cluttered interface leads to:",
+    "options": [
+      {
+        "id": "opt_hci_w1_q08_a",
+        "text": "Better usability"
+      },
+      {
+        "id": "opt_hci_w1_q08_b",
+        "text": "Faster performance"
+      },
+      {
+        "id": "opt_hci_w1_q08_c",
+        "text": "User confusion"
+      },
+      {
+        "id": "opt_hci_w1_q08_d",
+        "text": "Improved satisfaction"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q08_c",
+    "topic": "Indicators of Bad Design",
+    "explanation": "“Overcomplicated interface: cluttered screens, too many options, or unnecessary features overwhelm the user” – one of the indicators of bad design; these reduce satisfaction and cause frustration.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 10,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 10,
+      "rawAnswer": "C",
+      "rawQNum": 8
+    }
+  },
+  {
+    "id": "hci_w1_q09",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 9,
+    "questionText": "Which of the following best describes interaction design (IxD)?",
+    "text": "Which of the following best describes interaction design (IxD)?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q09_a",
+        "text": "Designing hardware components"
+      },
+      {
+        "id": "opt_hci_w1_q09_b",
+        "text": "Designing interactive digital systems and experiences"
+      },
+      {
+        "id": "opt_hci_w1_q09_c",
+        "text": "Managing databases"
+      },
+      {
+        "id": "opt_hci_w1_q09_d",
+        "text": "Programming languages"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q09_b",
+    "topic": "Interaction Design (IxD) Definition",
+    "explanation": "IxD is “the practice of designing interactive digital products, environments, systems, and services”.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 10,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 10,
+      "rawAnswer": "B",
+      "rawQNum": 9
+    }
+  },
+  {
+    "id": "hci_w1_q10",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "assignment",
+    "type": "assignment",
+    "category": "assignment",
+    "categoryId": "assignment",
+    "categoryName": "Weekly Assignment",
+    "originalHeading": "1.5 Week 1 assignment: solved",
+    "originalQuestionNumber": 10,
+    "questionText": "What is the main issue with too many features in an interface?",
+    "text": "What is the main issue with too many features in an interface?",
+    "options": [
+      {
+        "id": "opt_hci_w1_q10_a",
+        "text": "Improves usability"
+      },
+      {
+        "id": "opt_hci_w1_q10_b",
+        "text": "Reduces cost"
+      },
+      {
+        "id": "opt_hci_w1_q10_c",
+        "text": "Overcomplicates user experience"
+      },
+      {
+        "id": "opt_hci_w1_q10_d",
+        "text": "Improves performance"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_q10_c",
+    "topic": "Interface Complexity",
+    "explanation": "Too many options/unnecessary features make an overcomplicated interface (bad-design indicator 4). Tutorial 1’s TV-remote example: dozens of unused buttons create a cluttered, confusing interface.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Question_Bank.pdf",
+    "sourcePageNumber": 11,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 11,
+      "rawAnswer": "C",
+      "rawQNum": 10
+    }
+  },
+  {
+    "id": "hci_w1_p01",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P1",
+    "questionText": "According to the lecture, HCI emerged as a field in which decade?",
+    "text": "According to the lecture, HCI emerged as a field in which decade?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p01_a",
+        "text": "1960s"
+      },
+      {
+        "id": "opt_hci_w1_p01_b",
+        "text": "1970s"
+      },
+      {
+        "id": "opt_hci_w1_p01_c",
+        "text": "1980s"
+      },
+      {
+        "id": "opt_hci_w1_p01_d",
+        "text": "2000s"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p01_c",
+    "topic": "HCI Emergence and History",
+    "explanation": "“HCI emerged in the 1980s, influenced by computer science, psychology, and cognitive science.”",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 12,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 12,
+      "rawAnswer": "C",
+      "rawQNum": "P1"
+    }
+  },
+  {
+    "id": "hci_w1_p02",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P2",
+    "questionText": "Which of these is the usability component that measures how easily users can return to a system after a break?",
+    "text": "Which of these is the usability component that measures how easily users can return to a system after a break?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p02_a",
+        "text": "Learnability"
+      },
+      {
+        "id": "opt_hci_w1_p02_b",
+        "text": "Effectiveness"
+      },
+      {
+        "id": "opt_hci_w1_p02_c",
+        "text": "Efficiency"
+      },
+      {
+        "id": "opt_hci_w1_p02_d",
+        "text": "Memorability"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p02_d",
+    "topic": "Memorability in Usability",
+    "explanation": "Memorability = ease of returning after a break; learnability = ease for new users to begin.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 12,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 12,
+      "rawAnswer": "D",
+      "rawQNum": "P2"
+    }
+  },
+  {
+    "id": "hci_w1_p03",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P3",
+    "questionText": "In the lecture’s nested model, which concept is the broadest?",
+    "text": "In the lecture’s nested model, which concept is the broadest?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p03_a",
+        "text": "Usability"
+      },
+      {
+        "id": "opt_hci_w1_p03_b",
+        "text": "Customer experience"
+      },
+      {
+        "id": "opt_hci_w1_p03_c",
+        "text": "User experience"
+      },
+      {
+        "id": "opt_hci_w1_p03_d",
+        "text": "Accessibility"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p03_b",
+    "topic": "Nested Model of UX and CX",
+    "explanation": "The slide nests Usability inside User Experience inside Customer Experience.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 12,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 12,
+      "rawAnswer": "B",
+      "rawQNum": "P3"
+    }
+  },
+  {
+    "id": "hci_w1_p04",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P4",
+    "questionText": "Which interaction style is described as “efficient for technical users; relies on text commands”?",
+    "text": "Which interaction style is described as “efficient for technical users; relies on text commands”?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p04_a",
+        "text": "CLI"
+      },
+      {
+        "id": "opt_hci_w1_p04_b",
+        "text": "VUI"
+      },
+      {
+        "id": "opt_hci_w1_p04_c",
+        "text": "GUI"
+      },
+      {
+        "id": "opt_hci_w1_p04_d",
+        "text": "NUI"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p04_a",
+    "topic": "Interaction Styles",
+    "explanation": "CLI = Command Line Interface. GUI uses icons/buttons, VUI uses speech, NUI uses intuitive actions such as gestures or voice.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 12,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 12,
+      "rawAnswer": "A",
+      "rawQNum": "P4"
+    }
+  },
+  {
+    "id": "hci_w1_p05",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P5",
+    "questionText": "The Boeing 737 MAX MCAS example in Tutorial 1 mainly illustrates the lack of:",
+    "text": "The Boeing 737 MAX MCAS example in Tutorial 1 mainly illustrates the lack of:",
+    "options": [
+      {
+        "id": "opt_hci_w1_p05_a",
+        "text": "Consistency of colours"
+      },
+      {
+        "id": "opt_hci_w1_p05_b",
+        "text": "Aesthetic appeal"
+      },
+      {
+        "id": "opt_hci_w1_p05_c",
+        "text": "Visibility and feedback"
+      },
+      {
+        "id": "opt_hci_w1_p05_d",
+        "text": "Learnability for novices"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p05_c",
+    "topic": "Design Failures and Real-World Case Studies",
+    "explanation": "MCAS “activated without clear feedback to the pilot. Lack of proper visibility and feedback led to tragic crashes.”",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 13,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 13,
+      "rawAnswer": "C",
+      "rawQNum": "P5"
+    }
+  },
+  {
+    "id": "hci_w1_p06",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P6",
+    "questionText": "A Braille character consists of:",
+    "text": "A Braille character consists of:",
+    "options": [
+      {
+        "id": "opt_hci_w1_p06_a",
+        "text": "8 dots in a 2×4 grid"
+      },
+      {
+        "id": "opt_hci_w1_p06_b",
+        "text": "6 dots in a 2×3 grid"
+      },
+      {
+        "id": "opt_hci_w1_p06_c",
+        "text": "4 dots in a 2×2 grid"
+      },
+      {
+        "id": "opt_hci_w1_p06_d",
+        "text": "9 dots in a 3×3 grid"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p06_b",
+    "topic": "Accessibility and Braille Display",
+    "explanation": "Each Braille character has 6 dots arranged in 2 columns and 3 rows, numbered 1 to 6 (Project WAYV slides).",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 13,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 13,
+      "rawAnswer": "B",
+      "rawQNum": "P6"
+    }
+  },
+  {
+    "id": "hci_w1_p07",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P7",
+    "questionText": "Which is NOT listed as a challenge of digital transformation?",
+    "text": "Which is NOT listed as a challenge of digital transformation?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p07_a",
+        "text": "Digital divide"
+      },
+      {
+        "id": "opt_hci_w1_p07_b",
+        "text": "Skill gaps"
+      },
+      {
+        "id": "opt_hci_w1_p07_c",
+        "text": "Data security"
+      },
+      {
+        "id": "opt_hci_w1_p07_d",
+        "text": "Increased paper usage"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p07_d",
+    "topic": "Challenges of Digital Transformation",
+    "explanation": "The four challenges are data security, digital divide, skill gaps and privacy concerns.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 13,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 13,
+      "rawAnswer": "D",
+      "rawQNum": "P7"
+    }
+  },
+  {
+    "id": "hci_w1_p08",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P8",
+    "questionText": "Which usability-evaluation method has experts judge an interface against usability principles?",
+    "text": "Which usability-evaluation method has experts judge an interface against usability principles?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p08_a",
+        "text": "A/B testing"
+      },
+      {
+        "id": "opt_hci_w1_p08_b",
+        "text": "Cognitive walkthrough"
+      },
+      {
+        "id": "opt_hci_w1_p08_c",
+        "text": "Heuristic evaluation"
+      },
+      {
+        "id": "opt_hci_w1_p08_d",
+        "text": "Surveys"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p08_c",
+    "topic": "Usability Evaluation Methods",
+    "explanation": "Heuristic evaluation: “Experts assess the interface against usability principles.” A cognitive walkthrough simulates a user’s experience; A/B testing compares two versions.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 13,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 13,
+      "rawAnswer": "C",
+      "rawQNum": "P8"
+    }
+  },
+  {
+    "id": "hci_w1_p09",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P9",
+    "questionText": "Which guideline is named in Week 1 as the standard for web accessibility?",
+    "text": "Which guideline is named in Week 1 as the standard for web accessibility?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p09_a",
+        "text": "ISO 9001"
+      },
+      {
+        "id": "opt_hci_w1_p09_b",
+        "text": "WCAG"
+      },
+      {
+        "id": "opt_hci_w1_p09_c",
+        "text": "GDPR"
+      },
+      {
+        "id": "opt_hci_w1_p09_d",
+        "text": "IEEE 802.11"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p09_b",
+    "topic": "Accessibility Standards (WCAG)",
+    "explanation": "The accessibility slide refers to WCAG (Web Content Accessibility Guidelines) and ARIA.",
+    "difficulty": "medium",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 13,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 13,
+      "rawAnswer": "B",
+      "rawQNum": "P9"
+    }
+  },
+  {
+    "id": "hci_w1_p10",
+    "subjectId": "hci",
+    "courseId": "HCI",
+    "examType": "nptel",
+    "week": 1,
+    "questionType": "other",
+    "type": "other",
+    "category": "other",
+    "categoryId": "other",
+    "categoryName": "Probable Practice Questions",
+    "originalHeading": "1.7 Probable practice questions – Week 1",
+    "originalQuestionNumber": "P10",
+    "questionText": "An Instagram like-button that turns red when tapped is an example of which principle?",
+    "text": "An Instagram like-button that turns red when tapped is an example of which principle?",
+    "options": [
+      {
+        "id": "opt_hci_w1_p10_a",
+        "text": "Feedback"
+      },
+      {
+        "id": "opt_hci_w1_p10_b",
+        "text": "Constraint"
+      },
+      {
+        "id": "opt_hci_w1_p10_c",
+        "text": "Affordance"
+      },
+      {
+        "id": "opt_hci_w1_p10_d",
+        "text": "Consistency"
+      }
+    ],
+    "correctOptionId": "opt_hci_w1_p10_a",
+    "topic": "Feedback Examples in Social Media",
+    "explanation": "Tutorial 1: it gives “immediate feedback that the user’s action has been registered”.",
+    "difficulty": "easy",
+    "marks": 1,
+    "negativeMarks": 0,
+    "sourceFilename": "NPTEL_HCI_Exam_Guide.pdf",
+    "sourcePageNumber": 14,
+    "extractionStatus": "parsed",
+    "verificationStatus": "verified",
+    "duplicateStatus": "unique",
+    "isOfficial": true,
+    "sourceType": "official_preload",
+    "importTimestamp": "2026-10-17T00:00:00.000Z",
+    "metadata": {
+      "sourcePage": 14,
+      "rawAnswer": "A",
+      "rawQNum": "P10"
+    }
+  }
+]

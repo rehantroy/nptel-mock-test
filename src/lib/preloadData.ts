@@ -1,24 +1,49 @@
 import preloadedQuestionsRaw from '../data/question-bank/industrial-iot/questions.json';
 import preloadedCategoriesRaw from '../data/question-bank/industrial-iot/categories.json';
+import preloadedHCIQuestionsRaw from '../data/question-bank/hci/questions.json';
+import preloadedHCICategoriesRaw from '../data/question-bank/hci/categories.json';
 import type { Question, QuestionCategory } from '../types';
+import { DEFAULT_SUBJECT, HCI_SUBJECT } from '../types';
 import {
   getAllQuestions,
   saveQuestionsTransactional,
   saveCategory,
   getCategories,
+  saveSubject,
+  getSubjects,
 } from './storage';
 
 export const PRELOADED_SUBJECT_ID = 'iiot';
+export const PRELOADED_HCI_SUBJECT_ID = 'hci';
 
+// Industrial IoT Dataset (375 questions)
 export const preloadedQuestions: Question[] = preloadedQuestionsRaw as unknown as Question[];
 export const preloadedCategories: QuestionCategory[] = preloadedCategoriesRaw as unknown as QuestionCategory[];
 
-export function getPreloadedQuestionsCount(): number {
+// Human-Computer Interaction Dataset (20 questions: 10 Assignment, 10 Other)
+export const preloadedHCIQuestions: Question[] = preloadedHCIQuestionsRaw as unknown as Question[];
+export const preloadedHCICategories: QuestionCategory[] = preloadedHCICategoriesRaw as unknown as QuestionCategory[];
+
+export function getPreloadedQuestionsCount(subjectId: string = PRELOADED_SUBJECT_ID): number {
+  if (subjectId === PRELOADED_HCI_SUBJECT_ID) {
+    return preloadedHCIQuestions.length;
+  }
   return preloadedQuestions.length;
 }
 
-export function getPreloadedQuestions(): Question[] {
+export function getPreloadedQuestions(subjectId: string = PRELOADED_SUBJECT_ID): Question[] {
+  if (subjectId === PRELOADED_HCI_SUBJECT_ID) {
+    return [...preloadedHCIQuestions];
+  }
   return [...preloadedQuestions];
+}
+
+export function getPreloadedHCIQuestionsCount(): number {
+  return preloadedHCIQuestions.length;
+}
+
+export function getPreloadedHCIQuestions(): Question[] {
+  return [...preloadedHCIQuestions];
 }
 
 /**
@@ -69,8 +94,8 @@ export async function preloadIndustrialIoTBank(force: boolean = false): Promise<
       totalInSubject: updatedTotal.length,
       message:
         questionsToSave.length > 0
-          ? `Successfully preloaded ${questionsToSave.length} questions into the question bank.`
-          : `All 375 preloaded questions already exist in the question bank. No duplicates created.`,
+          ? `Successfully preloaded ${questionsToSave.length} questions into the Industrial IoT question bank.`
+          : `All 375 preloaded Industrial IoT questions already exist in the question bank. No duplicates created.`,
     };
   } catch (err: any) {
     console.error('Failed to preload Industrial IoT question bank:', err);
@@ -78,32 +103,121 @@ export async function preloadIndustrialIoTBank(force: boolean = false): Promise<
       success: false,
       insertedCount: 0,
       totalInSubject: 0,
-      message: err?.message || 'Error occurred during question preloading.',
+      message: err?.message || 'Error occurred during Industrial IoT question preloading.',
+    };
+  }
+}
+
+/**
+ * Preloads the Human-Computer Interaction (HCI) question bank into IndexedDB.
+ * Safe and idempotent:
+ * - Inserts exactly the 20 official questions (10 Assignment + 10 Other for Week 1).
+ * - If force = true, upserts all 20 questions.
+ * - Does not touch attempts, history, or Industrial IoT questions.
+ */
+export async function preloadHCIBank(force: boolean = false): Promise<{
+  success: boolean;
+  insertedCount: number;
+  totalInSubject: number;
+  message: string;
+}> {
+  try {
+    // Ensure HCI subject exists
+    const subjects = await getSubjects();
+    if (!subjects.some((s) => s.id === HCI_SUBJECT.id)) {
+      await saveSubject(HCI_SUBJECT);
+    }
+
+    const existingQuestions = await getAllQuestions(PRELOADED_HCI_SUBJECT_ID);
+    const existingIdSet = new Set(existingQuestions.map((q) => q.id));
+
+    // Ensure HCI categories exist
+    const existingCats = await getCategories(PRELOADED_HCI_SUBJECT_ID);
+    const existingCatIds = new Set(existingCats.map((c) => c.id));
+    for (const cat of preloadedHCICategories) {
+      if (!existingCatIds.has(cat.id)) {
+        await saveCategory(cat);
+      }
+    }
+
+    let questionsToSave: Question[];
+    if (force) {
+      questionsToSave = preloadedHCIQuestions;
+    } else {
+      questionsToSave = preloadedHCIQuestions.filter((q) => !existingIdSet.has(q.id));
+    }
+
+    if (questionsToSave.length > 0) {
+      await saveQuestionsTransactional(questionsToSave);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('questions_updated'));
+      }
+    }
+
+    const updatedTotal = await getAllQuestions(PRELOADED_HCI_SUBJECT_ID);
+
+    return {
+      success: true,
+      insertedCount: questionsToSave.length,
+      totalInSubject: updatedTotal.length,
+      message:
+        questionsToSave.length > 0
+          ? `Successfully preloaded ${questionsToSave.length} official HCI questions into the question bank.`
+          : `All 20 preloaded HCI questions already exist in the question bank. No duplicates created.`,
+    };
+  } catch (err: any) {
+    console.error('Failed to preload HCI question bank:', err);
+    return {
+      success: false,
+      insertedCount: 0,
+      totalInSubject: 0,
+      message: err?.message || 'Error occurred during HCI question preloading.',
     };
   }
 }
 
 const SEEDED_KEY = 'iiot_official_seeded_v1';
+const HCI_SEEDED_KEY = 'hci_official_seeded_v1';
 
 /**
  * Initializes the question bank on application start.
- * If the current database has 0 questions for 'iiot' and has never been seeded, it auto-seeds them.
- * Once seeded, it never re-seeds on refresh, preserving intentional question deletions.
+ * Safely seeds subjects and official banks if empty without overriding user changes.
  */
 export async function initializePreloadedData(): Promise<void> {
   try {
-    if (typeof window !== 'undefined' && localStorage.getItem(SEEDED_KEY)) {
-      // Already initialized previously; do not re-insert on refresh
-      return;
+    // Ensure built-in subjects exist
+    const subs = await getSubjects();
+    if (!subs.some((s) => s.id === DEFAULT_SUBJECT.id)) {
+      await saveSubject(DEFAULT_SUBJECT);
+    }
+    if (!subs.some((s) => s.id === HCI_SUBJECT.id)) {
+      await saveSubject(HCI_SUBJECT);
     }
 
-    const existing = await getAllQuestions(PRELOADED_SUBJECT_ID);
-    if (existing.length === 0) {
-      console.log('Seeding initial Industrial IoT question bank (375 questions)...');
-      await preloadIndustrialIoTBank(false);
+    // 1. Seed Industrial IoT if empty and not yet seeded
+    const iiotSeeded = typeof window !== 'undefined' && localStorage.getItem(SEEDED_KEY);
+    if (!iiotSeeded) {
+      const existingIIOT = await getAllQuestions(PRELOADED_SUBJECT_ID);
+      if (existingIIOT.length === 0) {
+        console.log('Seeding initial Industrial IoT question bank (375 questions)...');
+        await preloadIndustrialIoTBank(false);
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(SEEDED_KEY, 'true');
+      }
     }
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(SEEDED_KEY, 'true');
+
+    // 2. Seed Human-Computer Interaction (HCI) if empty and not yet seeded
+    const hciSeeded = typeof window !== 'undefined' && localStorage.getItem(HCI_SEEDED_KEY);
+    if (!hciSeeded) {
+      const existingHCI = await getAllQuestions(PRELOADED_HCI_SUBJECT_ID);
+      if (existingHCI.length === 0) {
+        console.log('Seeding initial Human-Computer Interaction question bank (20 questions)...');
+        await preloadHCIBank(false);
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(HCI_SEEDED_KEY, 'true');
+      }
     }
   } catch (err) {
     console.warn('Initial preloaded data check failed:', err);

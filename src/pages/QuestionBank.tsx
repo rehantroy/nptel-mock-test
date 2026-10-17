@@ -25,8 +25,9 @@ import {
   deleteQuestion,
   exportDatabase,
   getCategories,
+  getActiveSubjectId,
 } from '../lib/storage';
-import { preloadIndustrialIoTBank } from '../lib/preloadData';
+import { preloadIndustrialIoTBank, preloadHCIBank } from '../lib/preloadData';
 import { cleanOldOcrImports } from '../lib/cleanupOldImports';
 import { FormattedContent } from '../components/FormattedContent';
 import {
@@ -139,12 +140,13 @@ export const QuestionBank: React.FC = () => {
 
 
   const handleExportJSON = async () => {
-    const backup = await exportDatabase();
+    const activeId = getActiveSubjectId();
+    const backup = await exportDatabase(activeId);
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `iiot_question_bank_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `${activeId}_question_bank_backup_${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -152,7 +154,8 @@ export const QuestionBank: React.FC = () => {
   const handlePreloadBank = async () => {
     setPreloading(true);
     try {
-      const res = await preloadIndustrialIoTBank();
+      const activeId = getActiveSubjectId();
+      const res = activeId === 'hci' ? await preloadHCIBank() : await preloadIndustrialIoTBank();
       setFeedback({
         type: res.success ? 'success' : 'error',
         message: res.message,
@@ -399,8 +402,10 @@ export const QuestionBank: React.FC = () => {
             onChange={(e) => setSelectedWeek(e.target.value)}
             className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-700"
           >
-            <option value="all">All Weeks (0–12)</option>
-            {WEEKS_LIST.map((w) => (
+            <option value="all">
+              {getActiveSubjectId() === 'hci' ? 'All Weeks (1–12)' : 'All Weeks (0–12)'}
+            </option>
+            {(getActiveSubjectId() === 'hci' ? WEEKS_LIST.filter((w) => w >= 1) : WEEKS_LIST).map((w) => (
               <option key={w} value={w}>
                 Week {w}
               </option>
@@ -486,7 +491,13 @@ export const QuestionBank: React.FC = () => {
                 className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold cursor-pointer shadow-xs flex items-center gap-1.5"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>{preloading ? 'Preloading...' : 'Preload 375 Official Questions'}</span>
+                <span>
+                  {preloading
+                    ? 'Preloading...'
+                    : getActiveSubjectId() === 'hci'
+                    ? 'Preload 20 Official HCI Questions'
+                    : 'Preload 375 Official Questions'}
+                </span>
               </button>
               <Link
                 to="/import"

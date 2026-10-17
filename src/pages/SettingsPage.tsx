@@ -28,7 +28,7 @@ import {
   getActiveSubjectId,
   setActiveSubjectId,
 } from '../lib/storage';
-import { preloadIndustrialIoTBank } from '../lib/preloadData';
+import { preloadIndustrialIoTBank, preloadHCIBank } from '../lib/preloadData';
 import { cleanOldOcrImports } from '../lib/cleanupOldImports';
 import { DEFAULT_SUBJECT, type Subject } from '../types';
 
@@ -59,6 +59,20 @@ export const SettingsPage: React.FC = () => {
       await loadStats();
     } catch (err: any) {
       setPreloadFeedback(`Error: ${err?.message || 'Failed to preload'}`);
+    } finally {
+      setIsPreloading(false);
+    }
+  };
+
+  const handlePreloadHCIBank = async (force: boolean = false) => {
+    setIsPreloading(true);
+    setPreloadFeedback(null);
+    try {
+      const res = await preloadHCIBank(force);
+      setPreloadFeedback(res.message);
+      await loadStats();
+    } catch (err: any) {
+      setPreloadFeedback(`Error: ${err?.message || 'Failed to preload HCI'}`);
     } finally {
       setIsPreloading(false);
     }
@@ -557,6 +571,38 @@ export const SettingsPage: React.FC = () => {
               disabled={isPreloading}
               className="px-3 py-2 bg-white border border-indigo-200 hover:bg-indigo-50 text-indigo-700 font-semibold text-xs rounded-xl transition cursor-pointer"
               title="Re-write all 375 preloaded questions with fresh copies"
+            >
+              <span>Force Re-sync</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Human-Computer Interaction (HCI) Dataset */}
+        <div className="p-4 rounded-2xl bg-purple-50/50 border border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <span className="text-xs font-bold text-purple-950">Human-Computer Interaction (HCI) Dataset (20 Total Questions)</span>
+            <p className="text-xs text-purple-800">
+              Week 1: 10 Assignment questions + 10 Probable practice questions extracted from official exam guide.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handlePreloadHCIBank(false)}
+              disabled={isPreloading}
+              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold text-xs rounded-xl transition flex items-center gap-1.5 shadow-xs cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>{isPreloading ? 'Preloading...' : 'Preload / Sync HCI'}</span>
+            </button>
+            <button
+              onClick={() => {
+                if (window.confirm('Force re-sync all 20 HCI questions? Existing custom questions and test history will be safely preserved.')) {
+                  handlePreloadHCIBank(true);
+                }
+              }}
+              disabled={isPreloading}
+              className="px-3 py-2 bg-white border border-purple-200 hover:bg-purple-50 text-purple-700 font-semibold text-xs rounded-xl transition cursor-pointer"
+              title="Re-write all 20 HCI preloaded questions with fresh copies"
             >
               <span>Force Re-sync</span>
             </button>
