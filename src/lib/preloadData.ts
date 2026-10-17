@@ -20,7 +20,7 @@ export const PRELOADED_HCI_SUBJECT_ID = 'hci';
 export const preloadedQuestions: Question[] = preloadedQuestionsRaw as unknown as Question[];
 export const preloadedCategories: QuestionCategory[] = preloadedCategoriesRaw as unknown as QuestionCategory[];
 
-// Human-Computer Interaction Dataset (20 questions: 10 Assignment, 10 Other)
+// Human-Computer Interaction Dataset (240 questions: 120 Assignment, 120 Other across Weeks 1-12)
 export const preloadedHCIQuestions: Question[] = preloadedHCIQuestionsRaw as unknown as Question[];
 export const preloadedHCICategories: QuestionCategory[] = preloadedHCICategoriesRaw as unknown as QuestionCategory[];
 
@@ -111,8 +111,8 @@ export async function preloadIndustrialIoTBank(force: boolean = false): Promise<
 /**
  * Preloads the Human-Computer Interaction (HCI) question bank into IndexedDB.
  * Safe and idempotent:
- * - Inserts exactly the 20 official questions (10 Assignment + 10 Other for Week 1).
- * - If force = true, upserts all 20 questions.
+ * - Inserts all 240 official questions (120 Assignment + 120 Other across Weeks 1-12).
+ * - If force = true, upserts all 240 questions.
  * - Does not touch attempts, history, or Industrial IoT questions.
  */
 export async function preloadHCIBank(force: boolean = false): Promise<{
@@ -163,7 +163,7 @@ export async function preloadHCIBank(force: boolean = false): Promise<{
       message:
         questionsToSave.length > 0
           ? `Successfully preloaded ${questionsToSave.length} official HCI questions into the question bank.`
-          : `All 20 preloaded HCI questions already exist in the question bank. No duplicates created.`,
+          : `All ${preloadedHCIQuestions.length} preloaded HCI questions already exist in the question bank. No duplicates created.`,
     };
   } catch (err: any) {
     console.error('Failed to preload HCI question bank:', err);
@@ -177,7 +177,7 @@ export async function preloadHCIBank(force: boolean = false): Promise<{
 }
 
 const SEEDED_KEY = 'iiot_official_seeded_v1';
-const HCI_SEEDED_KEY = 'hci_official_seeded_v1';
+const HCI_SEEDED_KEY = 'hci_official_seeded_v2';
 
 /**
  * Initializes the question bank on application start.
@@ -211,8 +211,8 @@ export async function initializePreloadedData(): Promise<void> {
     const hciSeeded = typeof window !== 'undefined' && localStorage.getItem(HCI_SEEDED_KEY);
     if (!hciSeeded) {
       const existingHCI = await getAllQuestions(PRELOADED_HCI_SUBJECT_ID);
-      if (existingHCI.length === 0) {
-        console.log('Seeding initial Human-Computer Interaction question bank (20 questions)...');
+      if (existingHCI.length < preloadedHCIQuestions.length) {
+        console.log(`Seeding/updating Human-Computer Interaction question bank (${preloadedHCIQuestions.length} questions)...`);
         await preloadHCIBank(false);
       }
       if (typeof window !== 'undefined') {

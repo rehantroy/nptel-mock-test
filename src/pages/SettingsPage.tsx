@@ -580,9 +580,9 @@ export const SettingsPage: React.FC = () => {
         {/* Human-Computer Interaction (HCI) Dataset */}
         <div className="p-4 rounded-2xl bg-purple-50/50 border border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-bold text-purple-950">Human-Computer Interaction (HCI) Dataset (20 Total Questions)</span>
+            <span className="text-xs font-bold text-purple-950">Human-Computer Interaction (HCI) Dataset (240 Total Questions)</span>
             <p className="text-xs text-purple-800">
-              Week 1: 10 Assignment questions + 10 Probable practice questions extracted from official exam guide.
+              Weeks 1–12: 120 Assignment questions + 120 Probable practice questions extracted from official exam guide.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -596,13 +596,13 @@ export const SettingsPage: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                if (window.confirm('Force re-sync all 20 HCI questions? Existing custom questions and test history will be safely preserved.')) {
+                if (window.confirm('Force re-sync all 240 HCI questions? Existing custom questions and test history will be safely preserved.')) {
                   handlePreloadHCIBank(true);
                 }
               }}
               disabled={isPreloading}
               className="px-3 py-2 bg-white border border-purple-200 hover:bg-purple-50 text-purple-700 font-semibold text-xs rounded-xl transition cursor-pointer"
-              title="Re-write all 20 HCI preloaded questions with fresh copies"
+              title="Re-write all 240 HCI preloaded questions with fresh copies"
             >
               <span>Force Re-sync</span>
             </button>

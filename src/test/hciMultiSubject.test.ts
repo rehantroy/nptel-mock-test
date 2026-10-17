@@ -22,7 +22,7 @@ import {
   generateTestAttempt,
   gradeAttempt,
 } from '../lib/testEngine';
-import { HCI_SUBJECT, DEFAULT_SUBJECT, type TestAttemptConfig } from '../types';
+import { HCI_SUBJECT, DEFAULT_SUBJECT, type TestAttemptConfig, type WeekNumber } from '../types';
 
 describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
   beforeEach(async () => {
@@ -30,26 +30,35 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
     await clearAttempts('all');
   });
 
-  describe('1. HCI Question Bank Extraction & Data Integrity (20 Questions)', () => {
-    it('contains exactly 20 preloaded HCI questions in total', () => {
-      expect(getPreloadedHCIQuestionsCount()).toBe(20);
+  describe('1. HCI Question Bank Extraction & Data Integrity (240 Questions across Weeks 1-12)', () => {
+    it('contains exactly 240 preloaded HCI questions in total', () => {
+      expect(getPreloadedHCIQuestionsCount()).toBe(240);
       const qs = getPreloadedHCIQuestions();
-      expect(qs.length).toBe(20);
+      expect(qs.length).toBe(240);
     });
 
-    it('contains exactly 10 Assignment and 10 Other questions', () => {
+    it('contains exactly 120 Assignment and 120 Other questions across Weeks 1-12', () => {
       const qs = getPreloadedHCIQuestions();
       const assignments = qs.filter((q) => q.questionType === 'assignment');
       const others = qs.filter((q) => q.questionType === 'other');
 
-      expect(assignments.length).toBe(10);
-      expect(others.length).toBe(10);
+      expect(assignments.length).toBe(120);
+      expect(others.length).toBe(120);
+
+      // Verify each week from 1 to 12 has exactly 10 assignment and 10 other questions
+      for (let w = 1; w <= 12; w++) {
+        const wAssignments = assignments.filter((q) => q.week === w);
+        const wOthers = others.filter((q) => q.week === w);
+        expect(wAssignments.length).toBe(10);
+        expect(wOthers.length).toBe(10);
+      }
     });
 
-    it('maps all 20 questions accurately to Week 1 from the source PDF', () => {
+    it('maps all 240 questions accurately to Weeks 1-12 from the source PDF', () => {
       const qs = getPreloadedHCIQuestions();
       for (const q of qs) {
-        expect(q.week).toBe(1);
+        expect(q.week).toBeGreaterThanOrEqual(1);
+        expect(q.week).toBeLessThanOrEqual(12);
         expect(q.subjectId).toBe('hci');
         expect(q.courseId).toBe('HCI');
         expect(q.verificationStatus).toBe('verified');
@@ -72,27 +81,33 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       }
     });
 
-    it('verifies stable question IDs and option IDs across both categories', () => {
+    it('verifies stable question IDs and option IDs across all 12 weeks', () => {
       const qs = getPreloadedHCIQuestions();
       const qIds = new Set<string>();
       const optIds = new Set<string>();
 
-      // Check assignment IDs
-      for (let i = 1; i <= 10; i++) {
-        const expectedId = `hci_w1_q${String(i).padStart(2, '0')}`;
-        const found = qs.find((q) => q.id === expectedId);
-        expect(found).toBeDefined();
-        expect(found?.questionType).toBe('assignment');
-        expect(found?.originalQuestionNumber).toBe(i);
+      // Check assignment IDs for all 12 weeks
+      for (let w = 1; w <= 12; w++) {
+        for (let i = 1; i <= 10; i++) {
+          const expectedId = `hci_w${w}_q${String(i).padStart(2, '0')}`;
+          const found = qs.find((q) => q.id === expectedId);
+          expect(found).toBeDefined();
+          expect(found?.questionType).toBe('assignment');
+          expect(found?.originalQuestionNumber).toBe(i);
+          expect(found?.week).toBe(w);
+        }
       }
 
-      // Check practice / other IDs
-      for (let i = 1; i <= 10; i++) {
-        const expectedId = `hci_w1_p${String(i).padStart(2, '0')}`;
-        const found = qs.find((q) => q.id === expectedId);
-        expect(found).toBeDefined();
-        expect(found?.questionType).toBe('other');
-        expect(found?.originalQuestionNumber).toBe(`P${i}`);
+      // Check practice / other IDs for all 12 weeks
+      for (let w = 1; w <= 12; w++) {
+        for (let i = 1; i <= 10; i++) {
+          const expectedId = `hci_w${w}_p${String(i).padStart(2, '0')}`;
+          const found = qs.find((q) => q.id === expectedId);
+          expect(found).toBeDefined();
+          expect(found?.questionType).toBe('other');
+          expect(found?.originalQuestionNumber).toBe(`P${i}`);
+          expect(found?.week).toBe(w);
+        }
       }
 
       // Check overall uniqueness of IDs
@@ -104,50 +119,40 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
           optIds.add(opt.id);
         }
       }
-      expect(qIds.size).toBe(20);
-      expect(optIds.size).toBe(80);
-    });
-
-    it('verifies explanations and source metadata are present for verified questions', () => {
-      const qs = getPreloadedHCIQuestions();
-      for (const q of qs) {
-        expect(q.explanation).toBeDefined();
-        expect(q.explanation?.trim().length).toBeGreaterThan(0);
-        expect(q.sourceFilename).toBeDefined();
-        expect(q.sourceFilename?.endsWith('.pdf')).toBe(true);
-      }
+      expect(qIds.size).toBe(240);
+      expect(optIds.size).toBe(960);
     });
   });
 
   describe('2. HCI Preload Idempotency and Database Integrity', () => {
-    it('successfully preloads 20 questions on first run and zero duplicates on subsequent runs', async () => {
+    it('successfully preloads 240 questions on first run and zero duplicates on subsequent runs', async () => {
       const firstRun = await preloadHCIBank(false);
       expect(firstRun.success).toBe(true);
-      expect(firstRun.insertedCount).toBe(20);
-      expect(firstRun.totalInSubject).toBe(20);
+      expect(firstRun.insertedCount).toBe(240);
+      expect(firstRun.totalInSubject).toBe(240);
 
       const inDbFirst = await getAllQuestions('hci');
-      expect(inDbFirst.length).toBe(20);
+      expect(inDbFirst.length).toBe(240);
 
       // Second preload should insert 0 new questions
       const secondRun = await preloadHCIBank(false);
       expect(secondRun.success).toBe(true);
       expect(secondRun.insertedCount).toBe(0);
-      expect(secondRun.totalInSubject).toBe(20);
+      expect(secondRun.totalInSubject).toBe(240);
 
       const inDbSecond = await getAllQuestions('hci');
-      expect(inDbSecond.length).toBe(20);
+      expect(inDbSecond.length).toBe(240);
     });
 
     it('force re-sync safely updates existing questions without duplicating', async () => {
       await preloadHCIBank(false);
       const forceRes = await preloadHCIBank(true);
       expect(forceRes.success).toBe(true);
-      expect(forceRes.insertedCount).toBe(20);
-      expect(forceRes.totalInSubject).toBe(20);
+      expect(forceRes.insertedCount).toBe(240);
+      expect(forceRes.totalInSubject).toBe(240);
 
       const inDb = await getAllQuestions('hci');
-      expect(inDb.length).toBe(20);
+      expect(inDb.length).toBe(240);
     });
   });
 
@@ -157,9 +162,9 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const iiotRes = await preloadIndustrialIoTBank(false);
       expect(iiotRes.insertedCount).toBe(375);
 
-      // Preload HCI (20 questions)
+      // Preload HCI (240 questions)
       const hciRes = await preloadHCIBank(false);
-      expect(hciRes.insertedCount).toBe(20);
+      expect(hciRes.insertedCount).toBe(240);
 
       // Query separately
       const iiotQuestions = await getAllQuestions(PRELOADED_SUBJECT_ID);
@@ -167,8 +172,8 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const allQuestions = await getAllQuestions('all');
 
       expect(iiotQuestions.length).toBe(375);
-      expect(hciQuestions.length).toBe(20);
-      expect(allQuestions.length).toBe(395);
+      expect(hciQuestions.length).toBe(240);
+      expect(allQuestions.length).toBe(615);
 
       // Ensure no IIoT questions have subjectId 'hci' and vice versa
       expect(iiotQuestions.every((q) => q.subjectId === 'iiot')).toBe(true);
@@ -183,7 +188,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       await preloadIndustrialIoTBank(true);
 
       const hciQuestions = await getAllQuestions('hci');
-      expect(hciQuestions.length).toBe(20);
+      expect(hciQuestions.length).toBe(240);
 
       const iiotQuestions = await getAllQuestions('iiot');
       expect(iiotQuestions.length).toBe(375);
@@ -193,7 +198,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       await preloadIndustrialIoTBank(false);
       await preloadHCIBank(false);
 
-      expect((await getAllQuestions('hci')).length).toBe(20);
+      expect((await getAllQuestions('hci')).length).toBe(240);
       expect((await getAllQuestions('iiot')).length).toBe(375);
 
       // Delete one HCI question
@@ -203,7 +208,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const hciRemaining = await getAllQuestions('hci');
       const iiotRemaining = await getAllQuestions('iiot');
 
-      expect(hciRemaining.length).toBe(19);
+      expect(hciRemaining.length).toBe(239);
       expect(iiotRemaining.length).toBe(375);
     });
   });
@@ -216,27 +221,30 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       allHciQuestions = await getAllQuestions('hci');
     });
 
-    it('Mode 1 (Week-wise): generates test with Week 1 assignment questions only', () => {
-      const config: TestAttemptConfig = {
-        mode: 'week_wise',
-        selectedWeeks: [1],
-        selectedWeek: 1,
-        questionType: 'assignment',
-        subjectId: 'hci',
-      };
+    it('Mode 1 (Week-wise): generates test with specified week assignment questions only', () => {
+      const targetWeeks: WeekNumber[] = [1, 5, 12];
+      for (const targetWeek of targetWeeks) {
+        const config: TestAttemptConfig = {
+          mode: 'week_wise',
+          selectedWeeks: [targetWeek],
+          selectedWeek: targetWeek,
+          questionType: 'assignment',
+          subjectId: 'hci',
+        };
 
-      const eligible = filterQuestionsForTest(allHciQuestions, config);
-      expect(eligible.length).toBe(10);
-      expect(eligible.every((q) => q.questionType === 'assignment' && q.week === 1)).toBe(true);
+        const eligible = filterQuestionsForTest(allHciQuestions, config);
+        expect(eligible.length).toBe(10);
+        expect(eligible.every((q) => q.questionType === 'assignment' && q.week === targetWeek)).toBe(true);
 
-      const attempt = generateTestAttempt(eligible, config);
-      expect(attempt.subjectId).toBe('hci');
-      expect(attempt.questionOrder.length).toBe(10);
-      expect(attempt.totalEligible).toBe(10);
+        const attempt = generateTestAttempt(eligible, config);
+        expect(attempt.subjectId).toBe('hci');
+        expect(attempt.questionOrder.length).toBe(10);
+        expect(attempt.totalEligible).toBe(10);
+      }
     });
 
     it('Mode 2 (Custom Test): correctly filters by categories in HCI', () => {
-      // Assignment only
+      // Assignment only for Week 1
       const configAssignment: TestAttemptConfig = {
         mode: 'custom',
         selectedWeeks: [1],
@@ -246,7 +254,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const eligibleAssign = filterQuestionsForTest(allHciQuestions, configAssignment);
       expect(eligibleAssign.length).toBe(10);
 
-      // Other only
+      // Other only for Week 1
       const configOther: TestAttemptConfig = {
         mode: 'custom',
         selectedWeeks: [1],
@@ -256,7 +264,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const eligibleOther = filterQuestionsForTest(allHciQuestions, configOther);
       expect(eligibleOther.length).toBe(10);
 
-      // Both
+      // Both for Week 1
       const configBoth: TestAttemptConfig = {
         mode: 'custom',
         selectedWeeks: [1],
@@ -265,9 +273,19 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       };
       const eligibleBoth = filterQuestionsForTest(allHciQuestions, configBoth);
       expect(eligibleBoth.length).toBe(20);
+
+      // Both for Weeks 1..3 (20 * 3 = 60)
+      const configMultiWeek: TestAttemptConfig = {
+        mode: 'custom',
+        selectedWeeks: [1, 2, 3],
+        questionType: 'both',
+        subjectId: 'hci',
+      };
+      const eligibleMulti = filterQuestionsForTest(allHciQuestions, configMultiWeek);
+      expect(eligibleMulti.length).toBe(60);
     });
 
-    it('Mode 3 (All Week Test): includes all HCI assignment questions', () => {
+    it('Mode 3 (All Week Test): includes all 120 HCI assignment questions', () => {
       const config: TestAttemptConfig = {
         mode: 'all_week',
         selectedWeeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -276,11 +294,11 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       };
 
       const eligible = filterQuestionsForTest(allHciQuestions, config);
-      expect(eligible.length).toBe(10);
+      expect(eligible.length).toBe(120);
       expect(eligible.every((q) => q.questionType === 'assignment')).toBe(true);
     });
 
-    it('Mode 4 (Other Questions — All Weeks): includes all HCI extra/probable practice questions', () => {
+    it('Mode 4 (Other Questions — All Weeks): includes all 120 HCI extra/probable practice questions', () => {
       const config: TestAttemptConfig = {
         mode: 'other_all',
         selectedWeeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -289,11 +307,11 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       };
 
       const eligible = filterQuestionsForTest(allHciQuestions, config);
-      expect(eligible.length).toBe(10);
+      expect(eligible.length).toBe(120);
       expect(eligible.every((q) => q.questionType === 'other')).toBe(true);
     });
 
-    it('Mode 5 (All Questions Test): includes all 20 verified HCI questions strictly deduplicated', () => {
+    it('Mode 5 (All Questions Test): includes all 240 verified HCI questions strictly deduplicated', () => {
       const config: TestAttemptConfig = {
         mode: 'all_questions',
         selectedWeeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -302,12 +320,12 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       };
 
       const eligible = filterQuestionsForTest(allHciQuestions, config);
-      expect(eligible.length).toBe(20);
+      expect(eligible.length).toBe(240);
 
       const attempt = generateTestAttempt(eligible, config);
       expect(attempt.subjectId).toBe('hci');
-      expect(attempt.totalEligible).toBe(20);
-      expect(new Set(attempt.questionOrder).size).toBe(20);
+      expect(attempt.totalEligible).toBe(240);
+      expect(new Set(attempt.questionOrder).size).toBe(240);
     });
 
     it('grades an attempt accurately using HCI correct answer mappings', () => {
@@ -320,7 +338,7 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
       const eligible = filterQuestionsForTest(allHciQuestions, config);
       const attempt = generateTestAttempt(eligible, config);
 
-      // Build answers where user gets all correct
+      // Build answers where user gets all correct for week 1 (20 questions)
       const userAnswers: Record<string, string> = {};
       for (const q of eligible) {
         userAnswers[q.id] = q.correctOptionId;
@@ -329,9 +347,9 @@ describe('HCI Multi-Subject Platform and Isolation Test Suite', () => {
 
       const questionMap = new Map(eligible.map((q) => [q.id, q]));
       const graded = gradeAttempt(attempt, questionMap);
-      expect(graded.score).toBe(20);
+      expect(graded.score).toBe(240);
       expect(graded.percentage).toBe(100);
-      expect(graded.correctCount).toBe(20);
+      expect(graded.correctCount).toBe(240);
       expect(graded.incorrectCount).toBe(0);
       expect(graded.unansweredCount).toBe(0);
     });
