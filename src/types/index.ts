@@ -45,7 +45,17 @@ export const HCI_SUBJECT: Subject = {
   createdAt: '2026-01-01T00:00:00.000Z',
 };
 
-export const AVAILABLE_SUBJECTS: Subject[] = [DEFAULT_SUBJECT, HCI_SUBJECT];
+export const WILDLIFE_ECOLOGY_SUBJECT: Subject = {
+  id: 'wildlife-ecology',
+  name: 'Wildlife Ecology',
+  code: 'WE',
+  description: 'NPTEL Wildlife Ecology course (Prof. Ankur Awadhiya, IIT Kanpur)',
+  maxWeeks: 12,
+  isDefault: false,
+  createdAt: '2026-01-01T00:00:00.000Z',
+};
+
+export const AVAILABLE_SUBJECTS: Subject[] = [DEFAULT_SUBJECT, HCI_SUBJECT, WILDLIFE_ECOLOGY_SUBJECT];
 
 export interface QuestionCategory {
   id: string; // Stable slug, e.g., 'assignment', 'important_numerical', etc.

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "assignment",
+    "name": "Weekly Assignment",
+    "description": "Official weekly assignment questions (2026)",
+    "order": 1,
+    "subjectId": "wildlife-ecology",
+    "isOfficial": true
+  },
+  {
+    "id": "other",
+    "name": "Extra High-Probability Questions",
+    "description": "15 extra high-probability questions per week for exam preparation",
+    "order": 2,
+    "subjectId": "wildlife-ecology",
+    "isOfficial": true
+  }
+]

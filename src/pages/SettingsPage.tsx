@@ -28,7 +28,7 @@ import {
   getActiveSubjectId,
   setActiveSubjectId,
 } from '../lib/storage';
-import { preloadIndustrialIoTBank, preloadHCIBank } from '../lib/preloadData';
+import { preloadIndustrialIoTBank, preloadHCIBank, preloadWEBank } from '../lib/preloadData';
 import { cleanOldOcrImports } from '../lib/cleanupOldImports';
 import { DEFAULT_SUBJECT, type Subject } from '../types';
 
@@ -59,6 +59,20 @@ export const SettingsPage: React.FC = () => {
       await loadStats();
     } catch (err: any) {
       setPreloadFeedback(`Error: ${err?.message || 'Failed to preload'}`);
+    } finally {
+      setIsPreloading(false);
+    }
+  };
+
+  const handlePreloadWEBank = async (force: boolean = false) => {
+    setIsPreloading(true);
+    setPreloadFeedback(null);
+    try {
+      const res = await preloadWEBank(force);
+      setPreloadFeedback(res.message);
+      await loadStats();
+    } catch (err: any) {
+      setPreloadFeedback(`Error: ${err?.message || 'Failed to preload Wildlife Ecology'}`);
     } finally {
       setIsPreloading(false);
     }
@@ -603,6 +617,38 @@ export const SettingsPage: React.FC = () => {
               disabled={isPreloading}
               className="px-3 py-2 bg-white border border-purple-200 hover:bg-purple-50 text-purple-700 font-semibold text-xs rounded-xl transition cursor-pointer"
               title="Re-write all 240 HCI preloaded questions with fresh copies"
+            >
+              <span>Force Re-sync</span>
+            </button>
+          </div>
+        </div>
+
+                {/* Wildlife Ecology (WE) Dataset */}
+        <div className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <span className="text-xs font-bold text-emerald-950">Wildlife Ecology (WE) Dataset (310 Total Questions)</span>
+            <p className="text-xs text-emerald-800">
+              Week 0: 10 Assignment questions | Weeks 1–12: 10 Assignment + 15 Extra high-probability questions each.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handlePreloadWEBank(false)}
+              disabled={isPreloading}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-semibold text-xs rounded-xl transition flex items-center gap-1.5 shadow-xs cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>{isPreloading ? 'Preloading...' : 'Preload / Sync Wildlife Ecology'}</span>
+            </button>
+            <button
+              onClick={() => {
+                if (window.confirm('Force re-sync all 310 Wildlife Ecology questions? Existing custom questions and test history will be safely preserved.')) {
+                  handlePreloadWEBank(true);
+                }
+              }}
+              disabled={isPreloading}
+              className="px-3 py-2 bg-white border border-emerald-200 hover:bg-emerald-50 text-emerald-700 font-semibold text-xs rounded-xl transition cursor-pointer"
+              title="Re-write all 310 Wildlife Ecology preloaded questions with fresh copies"
             >
               <span>Force Re-sync</span>
             </button>
